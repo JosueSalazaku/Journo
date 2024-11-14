@@ -3,9 +3,7 @@ import type { NextRequest } from 'next/server';
 import { db } from '~/server/db';
 import { posts } from '~/server/db/schema'; 
 import { eq } from 'drizzle-orm';
-import { getAuth } from '@clerk/nextjs/server';
-import { nanoid } from 'nanoid';
-import { promises as fs } from 'fs';
+
 
 // GET method to fetch a post by ID
 export async function GET(
