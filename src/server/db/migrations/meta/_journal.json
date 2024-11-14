@@ -211,6 +211,13 @@
       "when": 1731594754459,
       "tag": "0029_cool_ironclad",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "6",
+      "when": 1731625189685,
+      "tag": "0030_violet_kate_bishop",
+      "breakpoints": true
     }
   ]
 }
