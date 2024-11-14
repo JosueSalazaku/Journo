@@ -8,7 +8,6 @@ export const users = createTable('users', {
   name: varchar('name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
   pictureUrl: text('picture_url').notNull(),
-  role: varchar('role', { length: 50 }).default('user').notNull(),
 }, (table) => ({
   emailIndex: uniqueIndex('emailIndex').on(table.email),
 }));
@@ -20,5 +19,4 @@ export const posts = createTable('posts', {
   content: text('content').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-});
-
+})
