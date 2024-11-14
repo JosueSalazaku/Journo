@@ -1,10 +1,10 @@
 import { ClerkProvider } from '@clerk/nextjs';
-import { TopNav } from "~/app/_components/TopNav";
+import { TopNav } from "~/components/TopNav";
 import "~/styles/globals.css";
 
 export const metadata = {
-  title: "Keanino",
-  description: "A bout love, art and Poetry",
+  title: "Journo",
+  description: "Write about your Travel journeys!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

@@ -36,7 +36,7 @@ export function TopNav() {
   return (
     <nav className="flex h-20 w-full items-center justify-between bg-primary px-5">
       <Link href="/" className="font-didot text-3xl font-bold text-main">
-        Keanino
+        Journo
       </Link>
       <button onClick={toggle} className="md:hidden text-white">
         {isOpen ? <HiOutlineX className="size-7" /> : <HiOutlineMenu className="size-7" />}
