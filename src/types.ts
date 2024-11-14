@@ -3,9 +3,6 @@ export interface Post {
   title: string;
   content: string;
   userId: string,
-  username: string,
-  pictureUrl: string,
-  imageUrl: string,
   createdAt: string,
   updatedAt: string,
 }
@@ -13,10 +10,7 @@ export interface Post {
 export interface User { 
   id: string;
   name: string;
-  firstName: string;
-  username: string;
   email: string;
-  clerkId: string;
   pictureUrl: string;
 }
 

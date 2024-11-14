@@ -4,11 +4,6 @@ import { db } from '~/server/db';
 import { posts, users } from '~/server/db/schema'; 
 import { eq } from 'drizzle-orm';
 
-
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
-export const preferredRegion = 'auto';
-
 export async function GET() {
   try {
     const data = await db
@@ -17,14 +12,12 @@ export async function GET() {
         title: posts.title,
         content: posts.content,
         userId: posts.userId,
-        username: users.username,
         pictureUrl: users.pictureUrl,
-        imageUrl: posts.imageUrl,
         createdAt: posts.createdAt,
         updatedAt: posts.updatedAt,
       })
       .from(posts)
-      .leftJoin(users, eq(posts.userId, users.clerkId));
+      .leftJoin(users, eq(posts.userId, users.id));
 
     return NextResponse.json(data);
   } catch (error) {
@@ -51,7 +44,6 @@ export async function POST(req: NextRequest) {
       title,
       content,
       userId,
-      imageUrl: '', // Skip image logic, default to empty string
     }).returning();
 
     return NextResponse.json({ message: 'Post created successfully', post: newPost });
