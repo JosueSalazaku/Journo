@@ -1,5 +1,9 @@
-import type { Provider } from "@supabase/supabase-js";
+"use client"
 import Image from "next/image";
+import { oAuthSignIn } from "./actions";
+
+type Provider = "google" | "notion";
+
 
 type OAuthProvider = {
   name: Provider;
@@ -27,6 +31,9 @@ export function OAuthButtons() {
         <div key={provider.name} className="mb-4">
         <button
           className="flex w-72 h-12 items-center justify-center gap-1 rounded-xl bg-slate-900 p-6 hover:bg-slate-800"
+            onClick={async () => {
+              await oAuthSignIn(provider.name);
+          }}
           >
           {provider.icon}    
           <h1>Sign in with</h1>
