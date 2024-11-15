@@ -2,7 +2,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  pictureUrl: string;
+  picture: string;
+  role: string;
 }
 
 export interface Post {
