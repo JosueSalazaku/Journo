@@ -12,7 +12,6 @@ export async function GET() {
         title: posts.title,
         content: posts.content,
         userId: posts.userId,
-        pictureUrl: users.pictureUrl,
         createdAt: posts.createdAt,
         updatedAt: posts.updatedAt,
       })
