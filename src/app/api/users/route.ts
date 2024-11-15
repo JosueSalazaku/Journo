@@ -3,7 +3,6 @@ import { db } from "~/server/db";
 import { users } from "~/server/db/schema"; 
 import type { User } from "~/types"; 
 
-
 export async function GET() {
   try {
     const data = await db.select().from(users);
@@ -14,24 +13,25 @@ export async function GET() {
   }
 }
 
-// POST: Create a new user
+
 export async function POST(request: Request) {
   try {
     // Validate and parse the request body
     const user: User = await request.json() as User;
 
     // Validate incoming data before inserting into the database
-    if (!user.name || !user.email || !user.pictureUrl) {
+    if (!user.name || !user.email || !user.picture) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
-
     // Insert user into the database
     const result = await db
       .insert(users)
       .values({
+        id: user.id,
         name: user.name,
         email: user.email,
-        pictureUrl: user.pictureUrl,
+        picture: user.picture,
+        role: user.role
       })
 
     // Return the inserted user or success response
