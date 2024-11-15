@@ -14,11 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-primary font-noto">
-          <div className="max-w-600 mx-auto h-[100vh]">
+      <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
             <TopNav />
             {children}
-          </div>
       </body>
     </html>
   );
