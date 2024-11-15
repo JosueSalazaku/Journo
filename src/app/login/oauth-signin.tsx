@@ -1,6 +1,8 @@
 "use client"
-import Image from "next/image";
 import { oAuthSignIn } from "./actions";
+import { SiNotion } from "react-icons/si";
+import { FaGoogle } from "react-icons/fa";
+
 
 type Provider = "google" | "notion";
 
@@ -16,12 +18,12 @@ export function OAuthButtons() {
     {
       name: "google",
       displayName: "Google",
-      icon: <Image src="google.svg" alt="Google" height={20} width={20} />,
+      icon: <FaGoogle  />,
     },
     {
       name: "notion",
       displayName: "Notion",
-      icon: <Image src="notion.svg" alt="Notion" height={20} width={20} />, 
+      icon: <SiNotion />, 
     }
   ];
 
@@ -35,7 +37,7 @@ export function OAuthButtons() {
               await oAuthSignIn(provider.name);
           }}
           >
-          {provider.icon}    
+          <div className="w-7">{provider.icon}</div>  
           <h1>Sign in with</h1>
           {provider.displayName}
         </button>
