@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 
-export function TopNav() {
+export function Nav() {
   
   return (
     <nav className="flex h-20 w-full items-center justify-between bg-primary px-5">
