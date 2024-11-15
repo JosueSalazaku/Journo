@@ -33,7 +33,6 @@ export const addPost = async (post: Post) => {
         title: post.title,
         content: post.content,
         userId: post.userId,
-        pictureUrl: post.pictureUrl,
       })
       .returning(); 
 

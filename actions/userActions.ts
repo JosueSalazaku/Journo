@@ -32,14 +32,9 @@ export const addUser = async (user: User) => {
         .insert(users)
         .values({
           name: user?.name,
-          firstName: user?.firstName,
-          username: user?.username,
           email: user?.email,
-          clerkId: user?.clerkId,
           pictureUrl: user?.pictureUrl,
         })
-        .returning({ clerkClientId: users.clerkId }); 
-  
       console.log('Inserted user:', result);
     } catch (error) {
       console.error('Error adding new user:', error);
