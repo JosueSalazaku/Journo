@@ -48,21 +48,28 @@ export async function signup(formData: FormData) {
 
 export async function oAuthSignIn(provider: "google" | "notion") {
   if (!provider) {
-    // Redirect immediately if provider is not provided
     return redirect("/login?message=No Provider Selected");
   }
 
   try {
+    // Ensure environment variables are properly set
+    if (!process.env.NEXT_PUBLIC_BASE_URL) {
+      console.error("NEXT_PUBLIC_BASE_URL is not defined.");
+      throw new Error("Base URL is missing");
+    }
+
     const supabase = await createClient();
-    const redirectUrl =
-      provider === "google"
-        ? "/auth/callback/google"
-        : "/auth/callback/notion";
+    const redirectUrls = {
+      google: "/auth/callback/google",
+      notion: "/auth/callback/notion",
+    };
+
+    const redirectUrl = redirectUrls[provider];
 
     const { error } = await supabase.auth.signInWithOAuth({
-      provider,
+      provider: provider as Provider,
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`, 
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`,
       },
     });
 

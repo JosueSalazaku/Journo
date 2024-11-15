@@ -37,7 +37,7 @@ export function OAuthButtons() {
               await oAuthSignIn(provider.name);
           }}
           >
-          <div className="w-7">{provider.icon}</div>  
+          <div className="w-6">{provider.icon}</div>  
           <h1>Sign in with</h1>
           {provider.displayName}
         </button>
