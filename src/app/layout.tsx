@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import { TopNav } from "~/components/TopNav";
 import "~/styles/globals.css";
 
@@ -15,13 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-primary font-noto">
-        <ClerkProvider>
-          <div className="max-w-600 mx-auto h-[100vh]">
+      <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
             <TopNav />
             {children}
-          </div>
-        </ClerkProvider>
       </body>
     </html>
   );

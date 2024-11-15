@@ -12,8 +12,7 @@ export const getAllUsers = async () => {
     } catch (error) {
         console.error('Error, users not found')
     }
-
-}
+};
 
 export const getUser = async (userId: string) => { 
   try {
@@ -31,18 +30,15 @@ export const addUser = async (user: User) => {
       const result = await db
         .insert(users)
         .values({
-          name: user?.name,
-          firstName: user?.firstName,
-          username: user?.username,
-          email: user?.email,
-          clerkId: user?.clerkId,
-          pictureUrl: user?.pictureUrl,
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          picture: user.picture,
+          role: user.role
         })
-        .returning({ clerkClientId: users.clerkId }); 
-  
       console.log('Inserted user:', result);
     } catch (error) {
       console.error('Error adding new user:', error);
     }
-  };
+};
   
