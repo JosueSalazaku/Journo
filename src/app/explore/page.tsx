@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>Welcome to Pages</div>
+    <div>Welcome to Explore</div>
   )
 }
 
