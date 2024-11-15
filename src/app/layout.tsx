@@ -1,4 +1,4 @@
-import { TopNav } from "~/components/TopNav";
+import { Nav } from "~/components/Nav";
 import "~/styles/globals.css";
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
-            <TopNav />
+            <Nav />
             {children}
       </body>
     </html>
