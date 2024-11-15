@@ -10,7 +10,7 @@ export function Nav() {
     <nav className="flex h-20 w-full items-center justify-between bg-primary px-5">
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold text-white">
         <Link href="/">Journo</Link>
-        <button onClick={() => setOpen(!open)}><IoIosMenu /></button>
+        <button onClick={() => setOpen(!open)} className="lg:hidden"><IoIosMenu /></button>
         {open && (
             <div className="absolute top-20 right-0 bg-black h-full w-full">
             <ul className="flex flex-col items-start p-3">
