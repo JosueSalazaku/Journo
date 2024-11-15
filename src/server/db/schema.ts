@@ -4,7 +4,7 @@ import {pgTableCreator, timestamp, varchar, uuid, uniqueIndex, text } from 'driz
 const createTable = pgTableCreator((name) => `${name}`);
 
 export const users = createTable('users', {
-  id: uuid('id').primaryKey(),
+  id: uuid('id').primaryKey().notNull(),
   name: varchar('name', { length: 255 }),
   email: varchar('email', { length: 255 }).notNull().unique(),
   picture: text('picture'), // Optional, fetched from provider
