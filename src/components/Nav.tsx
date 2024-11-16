@@ -10,14 +10,12 @@ export function Nav() {
 
   useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
-      console.log("Event target:", event.target); // Debugging
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node) &&
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
       ) {
-        console.log("Outside click detected, closing dropdown");
         setOpen(false); // Close dropdown on outside click
       }
     }
@@ -38,7 +36,7 @@ export function Nav() {
         <button
           ref={buttonRef} // Attach the separate button ref
           onClick={() => setOpen(!open)} // Toggle dropdown state
-          className="lg:hidden"
+          className="md:hidden lg:hidden"
         >
           <IoIosMenu />
         </button>
