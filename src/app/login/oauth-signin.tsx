@@ -1,5 +1,5 @@
 "use client"
-import { oAuthSignIn } from "./actions";
+import { oAuthSignInWithGoogle } from "./actions";
 import { SiNotion } from "react-icons/si";
 import { FaGoogle } from "react-icons/fa";
 
@@ -34,7 +34,7 @@ export function OAuthButtons() {
         <button
           className="flex w-72 h-12 items-center justify-center gap-1 rounded-xl bg-slate-900 p-6 hover:bg-slate-800"
             onClick={async () => {
-              await oAuthSignIn(provider.name);
+              await oAuthSignInWithGoogle();
           }}
           >
           <div className="w-6">{provider.icon}</div>  
