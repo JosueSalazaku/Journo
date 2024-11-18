@@ -49,7 +49,7 @@ export async function signup(formData: FormData) {
 export async function oAuthSignInWithGoogle() {
   try {
     const supabase = await createClient();
-    const redirectUrl = "/auth/callback/google";
+    const redirectUrl = "/api/auth/callback/google";
 
     console.log("Redirect URL:", `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`); // Log redirect URL
 
