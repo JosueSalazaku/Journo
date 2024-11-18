@@ -46,31 +46,26 @@ export async function signup(formData: FormData) {
   redirect('/')
 }
 
-export async function oAuthSignIn(provider: "google" | "notion") {
-  console.log("Provider:", provider); // Log the provider
+export async function oAuthSignInWithGoogle() {
   try {
     const supabase = await createClient();
-    const redirectUrls = {
-      google: "/auth/callback/google",
-      notion: "/auth/callback/notion",
-    };
-    const redirectUrl = redirectUrls[provider];
+    const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`;
 
-    console.log("Redirect URL:", `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`); // Log redirect URL
+    console.log("Redirect URL:", redirectUrl); 
 
     const { error } = await supabase.auth.signInWithOAuth({
-      provider,
+      provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`,
+        redirectTo: redirectUrl,
       },
     });
 
     if (error) {
       console.error("Supabase OAuth Error:", error.message);
-      return redirect("/login?message=Could not authenticate user");
+      redirect("/login?message=Could not authenticate user");
     }
   } catch (err) {
     console.error("Unexpected Error:", err);
-    return redirect("/login?message=An unexpected error occurred");
+    redirect("/login?message=An unexpected error occurred");
   }
 }

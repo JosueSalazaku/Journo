@@ -1,11 +1,9 @@
-"use client"
-import { oAuthSignIn } from "./actions";
+"use client";
+import { oAuthSignInWithGoogle } from "./actions";
 import { SiNotion } from "react-icons/si";
 import { FaGoogle } from "react-icons/fa";
 
-
 type Provider = "google" | "notion";
-
 
 type OAuthProvider = {
   name: Provider;
@@ -18,29 +16,32 @@ export function OAuthButtons() {
     {
       name: "google",
       displayName: "Google",
-      icon: <FaGoogle  />,
+      icon: <FaGoogle />,
     },
     {
       name: "notion",
       displayName: "Notion",
-      icon: <SiNotion />, 
-    }
+      icon: <SiNotion />,
+    },
   ];
 
   return (
     <>
       {oAuthProviders.map((provider) => (
         <div key={provider.name} className="mb-4">
-        <button
-          className="flex w-72 h-12 items-center justify-center gap-1 rounded-xl bg-slate-900 p-6 hover:bg-slate-800"
+          <button
+            className="flex h-12 w-72 items-center justify-center gap-1 rounded-xl bg-slate-900 p-6 hover:bg-slate-800"
             onClick={async () => {
-              await oAuthSignIn(provider.name);
-          }}
+              if (provider.name === "google") {
+                await oAuthSignInWithGoogle();
+              }
+              // Add Notion or other providers' logic if needed
+            }}
           >
-          <div className="w-6">{provider.icon}</div>  
-          <h1>Sign in with</h1>
-          {provider.displayName}
-        </button>
+            <div className="w-6">{provider.icon}</div>
+            <h1>Sign in with</h1>
+            {provider.displayName}
+          </button>
         </div>
       ))}
     </>

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { IoIosMenu } from "react-icons/io";
+import { Button } from "./ui/button";
 
 export function Nav() {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -50,10 +51,11 @@ export function Nav() {
             </ul>
           </div>
         )}
-        <div className="hidden items-center justify-end gap-3 text-lg font-bold text-white md:flex">
+        <div className="hidden items-center justify-end gap-3 text-lg font-normal text-white md:flex">
           <Link href="/write">Write</Link>
           <Link href="/explore">Explore</Link>
           <Link href="/insights">Insights</Link>
+          <Button className="bg-slate-800"><Link href="/login">Login / Sign Up</Link></Button>
         </div>
       </div>
     </nav>

@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
   if (!code) {
     console.error("No OAuth code received");
-    return NextResponse.redirect("/auth/auth-code-error");
+    return NextResponse.redirect("/api/auth/auth-code-error");
   }
 
   try {
@@ -17,12 +17,12 @@ export async function GET(request: Request) {
 
     if (error) {
       console.error("Error exchanging code for session:", error.message);
-      return NextResponse.redirect("/auth/auth-code-error");
+      return NextResponse.redirect("api/auth/auth-code-error");
     }
 
     return NextResponse.redirect(next);
   } catch (err) {
     console.error("Unexpected error during callback handling:", err);
-    return NextResponse.redirect("/auth/auth-code-error");
+    return NextResponse.redirect("api/auth/auth-code-error");
   }
 }
