@@ -49,23 +49,23 @@ export async function signup(formData: FormData) {
 export async function oAuthSignInWithGoogle() {
   try {
     const supabase = await createClient();
-    const redirectUrl = "/api/auth/callback/google";
+    const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`;
 
-    console.log("Redirect URL:", `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`); // Log redirect URL
+    console.log("Redirect URL:", redirectUrl); 
 
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}${redirectUrl}`,
+        redirectTo: redirectUrl,
       },
     });
 
     if (error) {
       console.error("Supabase OAuth Error:", error.message);
-      return redirect("/login?message=Could not authenticate user");
+      redirect("/login?message=Could not authenticate user");
     }
   } catch (err) {
     console.error("Unexpected Error:", err);
-    return redirect("/login?message=An unexpected error occurred");
+    redirect("/login?message=An unexpected error occurred");
   }
 }
