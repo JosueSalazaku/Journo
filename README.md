@@ -5,7 +5,7 @@ Journo is a travel blogging platform inspired by Medium, designed for sharing st
 ## Features
 
 ### User Authentication
-- Supabase-powered authentication with support for Google and Notion providers.
+- Supabase-powered authentication with support for Google and (Notion) providers.
 - Save user data from providers during sign-up/sign-in.
 
 ### Create, Read, Update, Delete (CRUD)
@@ -24,7 +24,7 @@ Journo is a travel blogging platform inspired by Medium, designed for sharing st
 - **Framework:** T3 Next.js
 - **Styling:** Tailwind CSS with shadcn
 - **Database:** PostgreSQL with DrizzleORM
-- **Authentication:** Supabase
+- **Authentication:** Better-auth
 - **Backend:** API integration for travel-related data
 - **Frontend:** React with hooks and modern UI practices
 
