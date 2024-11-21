@@ -47,7 +47,8 @@ export function Nav() {
             <ul className="flex flex-col items-start">
               <li className="py-2"><Link href="/write" onClick={() => {setOpen(false)}}>Write</Link></li>
               <li className="py-2"><Link href="/explore" onClick={() => {setOpen(false)}}>Explore</Link></li>
-              <li className="py-2"><Link href="/insights" onClick={() => {setOpen(false)}}>Insights</Link></li>
+              <li className="py-2"><Link href="/insights" onClick={() => { setOpen(false) }}>Insights</Link></li>
+              <li className="" onClick={() => { setOpen(false) }}><Link href="/api/auth/sign-in">Login / Sign Up</Link></li>
             </ul>
           </div>
         )}
@@ -55,7 +56,7 @@ export function Nav() {
           <Link href="/write">Write</Link>
           <Link href="/explore">Explore</Link>
           <Link href="/insights">Insights</Link>
-          <Button className="bg-slate-800"><Link href="/login">Login / Sign Up</Link></Button>
+          <Button className="bg-slate-800"><Link href="/api/auth/sign-in">Login / Sign Up</Link></Button>
         </div>
       </div>
     </nav>
