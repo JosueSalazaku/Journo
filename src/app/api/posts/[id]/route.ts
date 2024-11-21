@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { db } from '~/server/db';
-import { posts } from '~/server/db/schema'; 
+import { post } from '~/server/db/auth-schema'; 
 import { eq } from 'drizzle-orm';
 
 

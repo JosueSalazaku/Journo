@@ -1,22 +1,22 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { db } from '~/server/db';
-import { posts, users } from '~/server/db/schema'; 
+import { post, user } from '~/server/db/auth-schema'; 
 import { eq } from 'drizzle-orm';
 
 export async function GET() {
   try {
     const data = await db
       .select({
-        id: posts.id,
-        title: posts.title,
-        content: posts.content,
-        userId: posts.userId,
-        createdAt: posts.createdAt,
-        updatedAt: posts.updatedAt,
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        authorId: post.authorId,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
       })
-      .from(posts)
-      .leftJoin(users, eq(posts.userId, users.id));
+      .from(post)
+      .leftJoin(user, eq(post.authorId, user.id));
 
     return NextResponse.json(data);
   } catch (error) {
@@ -30,19 +30,22 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const title = formData.get('title') as string;
     const content = formData.get('content') as string;
-    const userId = formData.get('userId') as string;
+    const authorId = formData.get('userId') as string;
 
     // Check if required fields are present
-    if (!title || !content || !userId) {
-      console.error('Missing required fields:', { title, content, userId });
+    if (!title || !content || !authorId) {
+      console.error('Missing required fields:', { title, content, authorId });
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     // Insert the new post into the database
-    const [newPost] = await db.insert(posts).values({
+    const [newPost] = await db.insert(post).values({
+      id: crypto.randomUUID(),
       title,
       content,
-      userId,
+      authorId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }).returning();
 
     return NextResponse.json({ message: 'Post created successfully', post: newPost });

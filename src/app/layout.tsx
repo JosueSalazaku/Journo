@@ -1,4 +1,5 @@
 import { Nav } from "~/components/Nav";
+import { SessionProvider } from "~/components/SessionProvider";
 import "~/styles/globals.css";
 
 export const metadata = {
@@ -14,10 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
-            <Nav />
-            {children}
-      </body>
+      <SessionProvider>
+        <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
+          <Nav />
+          {children}
+        </body>
+      </SessionProvider>
     </html>
   );
 }

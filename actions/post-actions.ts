@@ -1,12 +1,12 @@
 "use server";
 import { eq } from "drizzle-orm";
 import { db } from "../src/server/db/index";
-import { posts } from "~/server/db/schema";
+import { post } from "~/server/db/auth-schema";
 import type { Post } from "~/types";
 
 export const getAllPosts = async () => {
   try {
-    const data = await db.select().from(posts);
+    const data = await db.select().from(post);
     console.log(data);
     return data;
   } catch (error) {
@@ -16,7 +16,7 @@ export const getAllPosts = async () => {
 
 export const getPost = async (postId: string) => {
   try {
-    const data = await db.select().from(posts).where(eq(posts.id, postId));
+    const data = await db.select().from(post).where(eq(post.id, postId));
     console.log(data);
     return data;
   } catch (error) {
@@ -25,16 +25,19 @@ export const getPost = async (postId: string) => {
   }
 };
 
-export const addPost = async (post: Post) => {
+export const addPost = async (newPost: Post) => {
   try {
     const result = await db
-      .insert(posts)
+      .insert(post)
       .values({
-        title: post.title,
-        content: post.content,
-        userId: post.userId,
+        id: newPost.id,
+        title: newPost.title,
+        content: newPost.content,
+        authorId: newPost.authorId,
+        createdAt: newPost.createdAt,
+        updatedAt: newPost.updatedAt,
       })
-      .returning(); 
+      .returning();
 
     console.log("Inserted post:", result);
     return result;

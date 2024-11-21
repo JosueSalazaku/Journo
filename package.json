@@ -16,11 +16,10 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.3",
     "@radix-ui/react-slot": "^1.1.0",
-    "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.46.1",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@types/formidable": "^3.4.5",
     "axios": "^1.7.7",
+    "better-auth": "^0.8.7-beta.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -56,7 +55,6 @@
     "postcss": "^8.4.34",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "supabase": "^1.176.10",
     "tailwindcss": "^3.4.3",
     "tsx": "^4.19.2",
     "typescript": "^5.6.2"
