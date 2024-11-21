@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "~/server/db"; 
-import { users } from "~/server/db/schema"; 
+import { user } from "~/server/db/auth-schema"; 
 import { eq } from "drizzle-orm";
-import type { User } from "@clerk/nextjs/server";
+import type { User } from "~/types";
 
 export async function GET(
   request: Request,
@@ -10,7 +10,7 @@ export async function GET(
 ) {
   try {
     const { id } = params;
-    const data = await db.select().from(users).where(eq(users.id, id));
+    const data = await db.select().from(user).where(eq(user.id, id));
     if (data.length === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
@@ -34,9 +34,9 @@ export async function PATCH(
     );
 
     const updatedUser = await db
-      .update(users)
+      .update(user)
       .set(updatesWithoutNulls) // Pass only non-null fields
-      .where(eq(users.id, id))
+      .where(eq(user.id, id))
       .returning();
 
     if (updatedUser.length === 0) {
@@ -62,8 +62,8 @@ export async function DELETE(
 
     // Perform the delete operation
     const deletedUser = await db
-      .delete(users)
-      .where(eq(users.id, id))
+      .delete(user)
+      .where(eq(user.id, id))
       .returning();
 
     if (deletedUser.length === 0) {
