@@ -225,6 +225,13 @@
       "when": 1731670956502,
       "tag": "0031_spotty_firebird",
       "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "6",
+      "when": 1732203095844,
+      "tag": "0032_tired_the_hand",
+      "breakpoints": true
     }
   ]
 }

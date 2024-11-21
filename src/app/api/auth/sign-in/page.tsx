@@ -1,5 +1,5 @@
 "use client"
-import { signIn } from "~/app/lib/auth-client";
+import { signIn } from "lib/auth-client";
 
 import React from 'react'
 import { Button } from "~/components/ui/button";
@@ -24,5 +24,3 @@ export default function Login() {
     </div>
   )
 }
-
- 
