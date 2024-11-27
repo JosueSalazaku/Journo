@@ -13,8 +13,10 @@ const config = {
         ignoreDuringBuilds: true,
     },
     images: {
-        domains: ['img.clerk.com'], // Allow Clerk image domain
+        domains: ['lh3.googleusercontent.com'], 
+
     },
+    
 };
 
 export default config;
