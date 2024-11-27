@@ -1,9 +1,8 @@
 "use client";
 import { useSession } from "lib/auth-client";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
-// Define the type for the session returned by `useSession`
 export interface Session {
   data?: {
     session?: {
@@ -23,21 +22,24 @@ export interface Session {
   isPending: boolean;
 }
 
-// Create a context with a default value of null
 const SessionContext = createContext<Session | null>(null);
 
-// Custom provider component
 export function SessionProvider({ children }: { children: ReactNode }) {
-  const session = useSession(); // This returns a value matching the `Session` type.
+  const session = useSession(); // Fetch session data from better-auth
+  const [sessionState, setSessionState] = useState(session);
+
+  // Update session state when session changes
+  useEffect(() => {
+    setSessionState(session);
+  }, [session]);
 
   return (
-    <SessionContext.Provider value={session}>
+    <SessionContext.Provider value={sessionState}>
       {children}
     </SessionContext.Provider>
   );
 }
 
-// Custom hook to access session data
 export function useCustomSession(): Session {
   const context = useContext(SessionContext);
   if (!context) {
