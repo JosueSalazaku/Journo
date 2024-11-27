@@ -5,8 +5,8 @@ import Image from "next/image";
 import { signOut } from "lib/auth-client";
 
 interface ProfileDropdownProps {
-  image: string | null; // URL of the profile image
-  name: string | null; // Optional user name (for further enhancement)
+  image: string | null; 
+  name: string | null;
 }
 
 export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ image, name }) => {
@@ -71,9 +71,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ image, name })
               <button
                 onClick={async () => {
                   try {
-                    await signOut(); // Use Better Auth's `signOut` function
+                    await signOut(); 
                     setIsOpen(false);
-                    window.location.href = "/"; // Redirect after signing out
+                    window.location.href = "/";
                   } catch (error) {
                     console.error("Failed to sign out:", error);
                   }
