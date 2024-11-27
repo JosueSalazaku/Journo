@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { IoIosMenu } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
 import { Button } from "./ui/button";
 import { useCustomSession } from "./SessionProvider";
 import { ProfileDropdown } from "./ProfileDropdown";
@@ -46,7 +47,7 @@ export function Nav() {
           onClick={() => setOpen(!open)}
           className="md:hidden lg:hidden"
         >
-          <IoIosMenu />
+          {open ? <MdOutlineClose /> : <IoIosMenu />}
         </button>
 
         {/* Small-screen dropdown */}
