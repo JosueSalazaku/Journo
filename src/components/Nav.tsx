@@ -102,7 +102,7 @@ export function Nav() {
 
       {/* ProfileDropdown Component */}
       {isLoggedIn && (
-        <div className="hidden md:block">
+        <div className="hidden md:block pl-4">
           <ProfileDropdown image={image ?? null} name={name ?? null} />
         </div>
       )}
