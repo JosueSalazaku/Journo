@@ -6,7 +6,7 @@ import { useCustomSession } from "./../components/SessionProvider";
 export default function HomePage() {
 
   const session = useCustomSession();
-  const { name, email, image } = session?.data?.user ?? {};
+  const name = session?.data?.user?.name;
   const isLoggedIn = !!session?.data?.user;
 
   return (

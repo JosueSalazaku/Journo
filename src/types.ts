@@ -12,7 +12,7 @@ export interface Post {
 	id: string;
 	title: string;
 	content: string;
-	authorId: string;
+	userId: string;
 	createdAt: Date;
 	updatedAt: Date;
 }
