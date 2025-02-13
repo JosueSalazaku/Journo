@@ -34,3 +34,16 @@ export const getAllPosts = async () => {
         throw error
     }
 }
+
+// export const getPostById = async (userId: string) => {
+//     if (!userId) {
+//         console.error('No userId found', userId)
+//     }
+
+//     try {
+    
+        
+//     } catch (error) {
+        
+//     }
+// }

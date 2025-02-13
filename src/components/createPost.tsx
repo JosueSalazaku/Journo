@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { useCustomSession } from "./SessionProvider";
 import { useState } from "react";
-import { addPosts } from "~/service/posts";
+import { addPosts } from "~/service/posts-service";
 
 export default function CreatePost() {
   const session = useCustomSession();
