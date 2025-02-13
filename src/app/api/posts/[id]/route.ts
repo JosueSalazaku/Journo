@@ -15,6 +15,8 @@ export async function GET(req: NextRequest, { param } : { param : { id: string }
       console.log(`Post with ID ${id} not found.`);
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     } 
+    console.log('Fetched post:', data[0]);
+    return NextResponse.json(data[0]);
   } catch (error) {
     console.error('Error ferching post:', error)
     return NextResponse.json({ error: 'Error fetching Post'}, { status: 500 })
