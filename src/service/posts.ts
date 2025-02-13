@@ -26,7 +26,7 @@ export const getAllPosts = async () => {
 
         if (response.status === 200 || response.status === 201) {
             console.log(response.data);
-            return response.data as Post[]
+            return response.data as Post[];
         }
        
     } catch (error) {

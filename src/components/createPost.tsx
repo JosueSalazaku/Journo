@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { useCustomSession } from "./SessionProvider";
 import { useState } from "react";
-import { addPosts } from "~/service/routes";
+import { addPosts } from "~/service/posts";
 
 export default function CreatePost() {
   const session = useCustomSession();
@@ -11,7 +11,7 @@ export default function CreatePost() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  
+
   const userId = session.data?.user?.id;
   const user = session.data?.user;
 

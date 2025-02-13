@@ -8,11 +8,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode; }) {
   return (
     <html lang="en">
       <SessionProvider>
