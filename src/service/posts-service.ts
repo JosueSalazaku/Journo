@@ -35,15 +35,19 @@ export const getAllPosts = async () => {
     }
 }
 
-// export const getPostById = async (userId: string) => {
-//     if (!userId) {
-//         console.error('No userId found', userId)
-//     }
+export const getPostById = async (userId: string) => {
+    if (!userId) {
+        console.error('No userId found', userId)
+    }
+    try {
+        const response = await axios.get(`/api/posts/${userId}`)
 
-//     try {
-    
-        
-//     } catch (error) {
-        
-//     }
-// }
+        if (response.status === 200 || response.status === 201) {
+            console.log(response.data);
+            return response.data as Post[];
+        }
+    } catch (error) {
+        console.error("Error Fetching post by id:", error)
+        throw error
+    }
+}

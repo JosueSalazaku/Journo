@@ -4,22 +4,21 @@ import { db } from '~/server/db';
 import { posts } from '~/server/db/auth-schema'; 
 import { eq } from 'drizzle-orm';
 
-// GET method to fetch a post by ID
-export async function GET(req: NextRequest, { param } : { param : { id: string } }) {
+export async function GET(req: NextRequest, { param } : { param : { userId: string } }) {
   try {
-    const { id } = param;
+    const { userId } = param;
 
-    const data = await db.select().from(posts).where(eq(posts.id, id));
+    const data = await db.select().from(posts).where(eq(posts.userId, userId));
 
     if (data.length === 0) {
-      console.log(`Post with ID ${id} not found.`);
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      console.log(`No posts found for user with ID ${userId}.`);
+      return NextResponse.json({ error: 'No posts found' }, { status: 404 });
     } 
-    console.log('Fetched post:', data[0]);
-    return NextResponse.json(data[0]);
+    console.log('Fetched posts:', data);
+    return NextResponse.json(data);
   } catch (error) {
-    console.error('Error ferching post:', error)
-    return NextResponse.json({ error: 'Error fetching Post'}, { status: 500 })
+    console.error('Error fetching posts:', error);
+    return NextResponse.json({ error: 'Error fetching posts' }, { status: 500 });
   }
 }
 
