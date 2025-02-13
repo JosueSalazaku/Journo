@@ -10,7 +10,8 @@ export default function CreatePost() {
   const [error, setError] = useState<string | null>(null);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-
+  const [loading, setLoading] = useState<boolean>(false);
+  
   const userId = session.data?.user?.id;
   const user = session.data?.user;
 
