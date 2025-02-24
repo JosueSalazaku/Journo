@@ -6,6 +6,8 @@ import { MdOutlineClose } from "react-icons/md";
 import { Button } from "./ui/button";
 import { useCustomSession } from "./SessionProvider";
 import { ProfileDropdown } from "./ProfileDropdown";
+import { SquarePlus } from 'lucide-react';
+
 
 export function Nav() {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -13,7 +15,7 @@ export function Nav() {
   const [open, setOpen] = useState<boolean>(false);
 
   const session = useCustomSession();
-  const { name, email, image } = session?.data?.user ?? {};
+  const { name, image } = session?.data?.user ?? {};
   const isLoggedIn = !!session?.data?.user;
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export function Nav() {
   }, [open]);
 
   return (
-    <nav className="flex h-20 w-full items-center justify-between bg-primary px-5">
+    <nav className="flex h-20 w-full items-center justify-between bg-primary px-10">
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold text-white">
         <Link href="/">Journo</Link>
         <button
@@ -60,7 +62,7 @@ export function Nav() {
                 <>
                   <li className="py-2">
                     <Link href="/write" onClick={() => setOpen(false)}>
-                      Write
+                    <SquarePlus />
                     </Link>
                   </li>
                   <li className="py-2">
@@ -88,7 +90,7 @@ export function Nav() {
         <div className="hidden items-center justify-end gap-3 text-lg font-normal text-white md:flex">
           {isLoggedIn ? (
             <>
-              <Link href="/write">Write</Link>
+              <Link href="/write"><SquarePlus /></Link>
               <Link href="/explore">Explore</Link>
               <Link href="/insights">Insights</Link>
             </>

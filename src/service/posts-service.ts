@@ -23,9 +23,7 @@ export const addPosts = async (title: string, content: string, userId: string) =
 export const getAllPosts = async () => {
     try {
         const response = await axios.get('/api/posts')
-
         if (response.status === 200 || response.status === 201) {
-            console.log(response.data);
             return response.data as Post[];
         }
        
@@ -41,13 +39,15 @@ export const getPostById = async (userId: string) => {
     }
     try {
         const response = await axios.get(`/api/posts/${userId}`)
-
         if (response.status === 200 || response.status === 201) {
-            console.log(response.data);
             return response.data as Post[];
         }
     } catch (error) {
         console.error("Error Fetching post by id:", error)
         throw error
     }
+}
+
+export const deletePost = async (postId: string) => {
+    //
 }
