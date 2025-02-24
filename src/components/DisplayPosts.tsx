@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPosts } from "~/service/posts-service";
 import { type Post } from "~/types";
 import { useCustomSession } from "./SessionProvider";
+import DeletePost from "./DeletePost";
 
 export default function DisplayPosts() {
   const session = useCustomSession();
@@ -49,6 +50,7 @@ export default function DisplayPosts() {
             <p>By: {user?.name}</p>
             <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
           </div>
+          <DeletePost />
         </div>
       ))}
     </div>

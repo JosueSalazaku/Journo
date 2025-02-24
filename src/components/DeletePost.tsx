@@ -1,7 +1,6 @@
 import { Button } from './ui/button';
-import axios from 'axios';
 
-export default function DeletePostButton() {
+export default function DeletePost() {
 
   return (
     <Button className="bg-red-800 hover:bg-primary">
