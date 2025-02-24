@@ -1,12 +1,12 @@
 
 import React from 'react'
-import CreatePost from '~/components/createPost'
+import WritePost from '~/components/WritePost'
 
 export default function page() {
   return (
     <main className="h-screen flex flex-col items-center justify-start bg-primary text-white">
       <section>
-        <CreatePost />
+        <WritePost />
       </section>
       <section>
         <p>Please sign in to create a post.</p>

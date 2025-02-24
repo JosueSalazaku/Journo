@@ -5,7 +5,7 @@ import { useCustomSession } from "./SessionProvider";
 import { useState } from "react";
 import { addPosts } from "~/service/posts-service";
 
-export default function CreatePost() {
+export default function WritePost() {
   const session = useCustomSession();
   const [error, setError] = useState<string | null>(null);
   const [title, setTitle] = useState<string>("");

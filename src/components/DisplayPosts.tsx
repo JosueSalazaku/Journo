@@ -12,7 +12,7 @@ export default function DisplayPosts() {
 
   const user = session.data?.user;
 
-  async function showPosts() {
+  async function fetchPosts() {
     try {
       setLoading(true);
       const usersPosts = await getAllPosts();
@@ -28,7 +28,7 @@ export default function DisplayPosts() {
     }
   }
   useEffect(() => {
-    void showPosts();
+    void fetchPosts();
   }, []);
 
   if (loading) {
