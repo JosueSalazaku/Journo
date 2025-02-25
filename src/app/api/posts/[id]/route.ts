@@ -4,8 +4,7 @@ import { db } from "~/server/db";
 import { posts } from "~/server/db/auth-schema";
 import { eq } from "drizzle-orm";
 import { auth } from "lib/auth";
-import { title } from "process";
-import { Post } from "~/types";
+import {type Post } from "~/types";
 
 export async function GET(req: NextRequest) {
   try {
