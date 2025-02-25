@@ -31,14 +31,14 @@ export const getAllPosts = async () => {
   }
 };
 
-export const getPostById = async (userId: string) => {
-  if (!userId) {
-    console.error("No userId found", userId);
+export const getPostById = async (id: string) => {
+  if (!id) {
+    console.error("No id found", id);
   }
   try {
-    const response = await axios.get(`/api/posts/${userId}`);
+    const response = await axios.get(`/api/posts/${id}`);
     if (response.status === 200 || response.status === 201) {
-      return response.data as Post[];
+      return response.data as Post;
     }
   } catch (error) {
     console.error("Error Fetching post by id:", error);
@@ -64,6 +64,24 @@ export const deletePost = async (id: string) => {
     }
   } catch (error) {
     console.error("Error deleting post:", error);
+    throw error;
+  }
+};
+
+export const updatePost = async (id: string) => {
+  if (!id) {
+    console.error("No id found", id)
+  } 
+  try {
+    const response = await axios.patch(`api/posts/${id}`)
+    if (response.status === 200 || response.status === 204) {
+      return response.data as Post;
+    } else {
+      console.error("Failed to update post", response.status);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error updating post:", error);
     throw error;
   }
 };
