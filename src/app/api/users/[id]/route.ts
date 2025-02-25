@@ -40,11 +40,9 @@ export async function PATCH(
       .returning();
 
     if (updatedUser.length === 0) {
-      console.log(`User with ID ${id} not found for update.`);
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    console.log('Updated user:', updatedUser[0]);
     return NextResponse.json(updatedUser[0]);
   } catch (error) {
     console.error('Error updating user:', error);
@@ -67,11 +65,9 @@ export async function DELETE(
       .returning();
 
     if (deletedUser.length === 0) {
-      console.log(`User with ID ${id} not found for deletion.`);
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    console.log('Deleted user:', deletedUser[0]);
     return NextResponse.json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Error deleting user:', error);

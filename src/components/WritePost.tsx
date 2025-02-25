@@ -39,7 +39,6 @@ export default function WritePost() {
 
     if (!title || !content || !userId) {
       setError("Missing required fields");
-      console.log("Missing required fields:", { title, content, userId });
       return;
     }
 
@@ -52,7 +51,7 @@ export default function WritePost() {
         // Create new post
         await addPosts(title, content, userId);
       }
-      router.push("/"); // Redirect to posts page after save
+      router.push("/"); 
     } catch (error) {
       setError("Failed to save post. Please try again.");
       console.error("Error saving post:", error);

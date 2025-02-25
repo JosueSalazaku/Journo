@@ -11,7 +11,7 @@ export const addPosts = async (title: string, content: string, userId: string) =
     });
 
     if (response.status === 200) {
-      console.log("Post added succesfully", response.data);
+        return response.data as Post
     }
   } catch (error) {
     console.error("Error adding post:", error);

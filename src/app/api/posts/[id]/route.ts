@@ -10,7 +10,6 @@ import { Post } from "~/types";
 export async function GET(req: NextRequest) {
   try {
     const requestHeaders = req.headers;
-    console.log("Request Headers:", requestHeaders);
     const session = await auth.api.getSession({ headers: requestHeaders });
     const userId = session?.user.id;
 
@@ -21,10 +20,8 @@ export async function GET(req: NextRequest) {
     const data = await db.select().from(posts).where(eq(posts.userId, userId));
 
     if (data.length === 0) {
-      console.log(`No posts found for user with ID ${userId}.`);
       return NextResponse.json({ error: "No posts found" }, { status: 404 });
     }
-    console.log("Fetched posts:", data);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -110,7 +107,6 @@ export async function DELETE(req: NextRequest,{ params }: { params: { id: string
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
-    console.log("Deleted post:", deletedPost[0]);
     return NextResponse.json({
       message: "Post deleted successfully",
       deletedPost: deletedPost[0],
