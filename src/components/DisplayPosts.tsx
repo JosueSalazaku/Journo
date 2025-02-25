@@ -43,18 +43,20 @@ export default function DisplayPosts() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      {posts.map((post) => (
-        <div key={post.id} className="mb-4 rounded-lg bg-white p-6 shadow-md">
-          <h2 className="mb-2 text-xl text-black font-bold">{post.title}</h2>
-          <p className="mb-4 text-gray-700">{post.content}</p>
-          <div className="text-sm text-gray-500">
-            <p>By: {user?.name}</p>
-            <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
+      {posts
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .map((post) => (
+          <div key={post.id} className="mb-4 rounded-lg bg-white p-6 shadow-md">
+            <h2 className="mb-2 text-xl text-black font-bold">{post.title}</h2>
+            <p className="mb-4 text-gray-700">{post.content}</p>
+            <div className="text-sm text-gray-500">
+              <p>By: {user?.name}</p>
+              <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
+            </div>
+            <DeletePost id={post.id} />
+            <EditPost post={post} />
           </div>
-          <DeletePost id={post.id} />
-          <EditPost post={post} />
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
