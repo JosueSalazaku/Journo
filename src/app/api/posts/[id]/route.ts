@@ -43,7 +43,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { title, content } = await req.json() as Post
+    const { title, content } = await req.json() as Post;
 
     const post = await db
       .select({ userId: posts.userId })
@@ -60,7 +60,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const updatedPost = await db.update(posts).set({title,content,updatedAt: new Date()}).where(eq(posts.id, id)).returning();
+    const updatedPost = await db.update(posts).set({ title, content, updatedAt: new Date() }).where(eq(posts.id, id)).returning();
     return NextResponse.json(updatedPost[0]);
   } catch (error) {
     console.error('Error updating post:', error);
