@@ -68,14 +68,20 @@ export const deletePost = async (id: string) => {
   }
 };
 
-export const updatePost = async (id: string) => {
+export const updatePost = async (id: string, updatedData: Partial<Post>) => {
   if (!id) {
-    console.error("No id found", id)
-  } 
+    console.error("No id found", id);
+    return null;
+  }
+
   try {
-    const response = await axios.patch(`api/posts/${id}`)
+    const response = await axios.patch(`/api/posts/${id}`, updatedData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (response.status === 200 || response.status === 204) {
-      console.log(response)
       return response.data as Post;
     } else {
       console.error("Failed to update post", response.status);
