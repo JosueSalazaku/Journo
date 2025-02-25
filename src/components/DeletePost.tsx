@@ -9,6 +9,7 @@ export default function DeletePost({ id }: DeletePostProps) {
   async function handleDeletePost() {
     try {
       await deletePost(id);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to delete post:", error);
     }
