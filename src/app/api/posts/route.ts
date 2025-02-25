@@ -54,4 +54,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Error creating post' }, { status: 500 });
   }
 }
-

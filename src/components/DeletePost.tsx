@@ -1,9 +1,24 @@
-import { Button } from './ui/button';
+import { deletePost } from "~/service/posts-service";
+import { Button } from "./ui/button";
 
-export default function DeletePost() {
+interface DeletePostProps {
+  id: string;
+}
+
+export default function DeletePost({ id }: DeletePostProps) {
+  async function handleDeletePost() {
+    try {
+      await deletePost(id);
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
+  }
 
   return (
-    <Button className="bg-red-800 hover:bg-primary">
+    <Button
+      onClick={() => handleDeletePost()}
+      className="bg-red-800 hover:bg-primary"
+    >
       Delete
     </Button>
   );

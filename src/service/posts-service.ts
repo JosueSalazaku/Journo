@@ -46,16 +46,18 @@ export const getPostById = async (userId: string) => {
   }
 };
 
-export const deletePost = async (postId: string) => {
-  if (!postId) {
-    console.error("No postId found", postId);
+export const deletePost = async (id: string) => {
+  if (!id) {
+    console.error("No postId found", id);
   }
 
   try {
-    const response = await axios.delete(`/api/posts/${postId}`);
+    const response = await axios.delete(`/api/posts/${id}`, {
+      method: 'DELETE'
+    });
     if (response.status === 200 || response.status === 204) {
-      console.log("Post deleted successfully");
       return true;
+
     } else {
       console.error("Failed to delete post", response.status);
       return false;

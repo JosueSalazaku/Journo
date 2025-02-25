@@ -3,14 +3,18 @@ import type { NextRequest } from "next/server";
 import { db } from "~/server/db";
 import { posts } from "~/server/db/auth-schema";
 import { eq } from "drizzle-orm";
-import { getSession, useSession } from "lib/auth-client";
+import { auth } from "lib/auth";
 
-export async function GET(
-  req: NextRequest,
-  { param }: { param: { userId: string } },
-) {
+export async function GET(req: NextRequest) {
   try {
-    const { userId } = param;
+    const requestHeaders = req.headers;
+    console.log("Request Headers:", requestHeaders);
+    const session = await auth.api.getSession({ headers: requestHeaders });
+    const userId = session?.user.id;
+
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const data = await db.select().from(posts).where(eq(posts.userId, userId));
 
@@ -35,11 +39,12 @@ export async function PUT() {
 }
 
 // DELETE method to delete a post by ID
-export async function DELETE(req: NextRequest, { param }: { param: { postId: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { postId } = param;
-    const session = await getSession();
-    const userId = session?.data?.user?.id;
+    const { id } = params;
+    const requestHeaders = req.headers;
+    const session = await auth.api.getSession({ headers: requestHeaders });
+    const userId = session?.user.id;
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -49,7 +54,7 @@ export async function DELETE(req: NextRequest, { param }: { param: { postId: str
     const post = await db
       .select({ userId: posts.userId })
       .from(posts)
-      .where(eq(posts.id, postId))
+      .where(eq(posts.id, id))
       .limit(1);
 
     if (post.length === 0) {
@@ -62,14 +67,14 @@ export async function DELETE(req: NextRequest, { param }: { param: { postId: str
     }
 
     // Perform the deletion if the user is the owner
-    const deletedPost = await db.delete(posts).where(eq(posts.id, postId)).returning();
-    
+    const deletedPost = await db.delete(posts).where(eq(posts.id, id)).returning();
+
     if (deletedPost.length === 0) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
 
     console.log("Deleted post:", deletedPost[0]);
-    return NextResponse.json({ message: "Post deleted successfully", deletedPost: deletedPost[0]});
+    return NextResponse.json({ message: "Post deleted successfully", deletedPost: deletedPost[0] });
   } catch (error) {
     console.error("Error deleting post:", error);
     return NextResponse.json({ error: "Error deleting post" }, { status: 500 });

@@ -50,7 +50,7 @@ export default function DisplayPosts() {
             <p>By: {user?.name}</p>
             <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
           </div>
-          <DeletePost />
+          <DeletePost id={post.id}/>
         </div>
       ))}
     </div>
