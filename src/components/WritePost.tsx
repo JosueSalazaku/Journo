@@ -2,18 +2,32 @@
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { useCustomSession } from "./SessionProvider";
-import { useState } from "react";
-import { addPosts } from "~/service/posts-service";
+import { useEffect, useState } from "react";
+import { addPosts, updatePost } from "~/service/posts-service";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function WritePost() {
   const session = useCustomSession();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const initialTitle = searchParams.get("title");
+  const initialContent = searchParams.get("content");
+
   const [error, setError] = useState<string | null>(null);
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [title, setTitle] = useState<string>(initialTitle! || "");
+  const [content, setContent] = useState<string>(initialContent! || "");
   const [loading, setLoading] = useState<boolean>(false);
 
   const userId = session.data?.user?.id;
   const user = session.data?.user;
+
+  useEffect(() => {
+    if (initialTitle && initialContent) {
+      setTitle(initialTitle);
+      setContent(initialContent);
+    }
+  }, [initialTitle, initialContent])
 
   async function handlePost(event: React.FormEvent) {
     event.preventDefault();
@@ -40,6 +54,15 @@ export default function WritePost() {
     }
 
     try {
+      setLoading(true);
+      if (id) {
+        // Update existing post
+        await updatePost(id);
+      } else {
+        // Create new post
+        await addPosts(title, content, userId);
+      }
+      router.push("/");
       await addPosts(title, content, userId);
     } catch (error) {
       setError("Failed to add post. Please try again.");

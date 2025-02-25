@@ -1,41 +1,29 @@
-import { useState } from "react";
-import { useCustomSession } from "./SessionProvider";
-import { getPostById } from "~/service/posts-service";
+"use client";
 import { type Post } from "~/types";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 interface EditPostProps {
-  id: string;
+  post: Post;
 }
 
-function EditPost({ id }: EditPostProps) {
-  const session = useCustomSession();
-  const [error, setError] = useState<string | null>(null);
-  const [post, setPost] = useState<Post | null>(null);
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+function EditPost({ post }: EditPostProps) {
+  const router = useRouter();
 
-  const userId = session.data?.user?.id;
-
-  // fetch the current Post
-  // then create a handle to edit it
-
-  async function getCurrentPost() {
-    if (userId) {
-      console.error("Not a user, login", userId);
+  const handleEditClick = () => {
+    if (!post) {
+      console.error("Post is undefined");
+      return;
     }
-    try {
-      const postById = await getPostById(id);
-      if (postById) {
-          setPost(postById);
-          console.log(postById)
-      }
-    } catch (error) {}
-  }
+
+    router.push(
+      `/write?id=${post.id}&title=${encodeURIComponent(post.title)}&content=${encodeURIComponent(post.content)}`
+    );
+  };
 
   return (
     <Button
+      onClick={handleEditClick}
       className="bg-blue-800 hover:bg-blue-200"
     >
       Edit

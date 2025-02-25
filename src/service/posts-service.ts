@@ -75,6 +75,7 @@ export const updatePost = async (id: string) => {
   try {
     const response = await axios.patch(`api/posts/${id}`)
     if (response.status === 200 || response.status === 204) {
+      console.log(response)
       return response.data as Post;
     } else {
       console.error("Failed to update post", response.status);
