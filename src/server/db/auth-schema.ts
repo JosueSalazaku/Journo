@@ -1,6 +1,6 @@
 import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const user = pgTable("users", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -10,11 +10,11 @@ export const user = pgTable("user", {
   updatedAt: timestamp("updatedAt").notNull(),
 });
 
-export const post = pgTable("post", {
+export const posts = pgTable("posts", {
 	id: text("id").primaryKey(),
 	title: text("title").notNull(),
 	content: text("content").notNull(),
-	authorId: text("authorId").notNull().references(() => user.id),
+	userId: text("userId").notNull().references(() => user.id),
 	createdAt: timestamp("createdAt").notNull(),
 	updatedAt: timestamp("updatedAt").notNull(),
 });

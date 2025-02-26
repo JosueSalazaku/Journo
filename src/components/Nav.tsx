@@ -2,12 +2,21 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { IoIosMenu } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
 import { Button } from "./ui/button";
+import { useCustomSession } from "./SessionProvider";
+import { ProfileDropdown } from "./ProfileDropdown";
+import { SquarePlus } from 'lucide-react';
+
 
 export function Nav() {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null); // Separate ref for the button
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState<boolean>(false);
+
+  const session = useCustomSession();
+  const { name, image } = session?.data?.user ?? {};
+  const isLoggedIn = !!session?.data?.user;
 
   useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
@@ -17,7 +26,7 @@ export function Nav() {
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
       ) {
-        setOpen(false); // Close dropdown on outside click
+        setOpen(false);
       }
     }
 
@@ -31,34 +40,74 @@ export function Nav() {
   }, [open]);
 
   return (
-    <nav className="flex h-20 w-full items-center justify-between bg-primary px-5">
+    <nav className="flex h-20 w-full items-center justify-between bg-primary px-10">
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold text-white">
         <Link href="/">Journo</Link>
         <button
-          ref={buttonRef} // Attach the separate button ref
-          onClick={() => setOpen(!open)} // Toggle dropdown state
+          ref={buttonRef}
+          onClick={() => setOpen(!open)}
           className="md:hidden lg:hidden"
         >
-          <IoIosMenu />
+          {open ? <MdOutlineClose /> : <IoIosMenu />}
         </button>
 
+        {/* Small-screen dropdown */}
         {open && (
-          <div ref={dropdownRef} className="absolute top-20 right-0 bg-black h-full w-full">
+          <div
+            ref={dropdownRef}
+            className="absolute right-0 top-20 h-full w-full bg-black"
+          >
             <ul className="flex flex-col items-start">
-              <li className="py-2"><Link href="/write" onClick={() => {setOpen(false)}}>Write</Link></li>
-              <li className="py-2"><Link href="/explore" onClick={() => {setOpen(false)}}>Explore</Link></li>
-              <li className="py-2"><Link href="/insights" onClick={() => { setOpen(false) }}>Insights</Link></li>
-              <li className="" onClick={() => { setOpen(false) }}><Link href="/api/auth/sign-in">Login / Sign Up</Link></li>
+              {isLoggedIn ? (
+                <>
+                  <li className="py-2">
+                    <Link href="/write" onClick={() => setOpen(false)}>
+                    <SquarePlus />
+                    </Link>
+                  </li>
+                  <li className="py-2">
+                    <Link href="/explore" onClick={() => setOpen(false)}>
+                      Explore
+                    </Link>
+                  </li>
+                  <li className="py-2">
+                    <Link href="/insights" onClick={() => setOpen(false)}>
+                      Insights
+                    </Link>
+                  </li>
+                </>
+              ) : null}
+              {!isLoggedIn && (
+                <li onClick={() => setOpen(false)}>
+                  <Link href="/api/auth/sign-in">Login / Sign Up</Link>
+                </li>
+              )}
             </ul>
           </div>
         )}
+
+        {/* Desktop Menu */}
         <div className="hidden items-center justify-end gap-3 text-lg font-normal text-white md:flex">
-          <Link href="/write">Write</Link>
-          <Link href="/explore">Explore</Link>
-          <Link href="/insights">Insights</Link>
-          <Button className="bg-slate-800"><Link href="/api/auth/sign-in">Login / Sign Up</Link></Button>
+          {isLoggedIn ? (
+            <>
+              <Link href="/write"><SquarePlus /></Link>
+              <Link href="/explore">Explore</Link>
+              <Link href="/insights">Insights</Link>
+            </>
+          ) : (
+            <Button className="bg-slate-800">
+              <Link href="/api/auth/sign-in">Login / Sign Up</Link>
+            </Button>
+          )}
         </div>
       </div>
+
+      {/* ProfileDropdown Component */}
+      {isLoggedIn && (
+        <div className="hidden md:block pl-4">
+          <ProfileDropdown image={image ?? null} name={name ?? null} />
+        </div>
+      )}
     </nav>
   );
 }

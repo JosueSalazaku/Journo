@@ -1,17 +1,17 @@
-
-import React from 'react'
-import CreatePost from '~/components/createPost'
+import React, { Suspense } from "react";
+import WritePost from "~/components/WritePost";
 
 export default function page() {
   return (
-    <main className="h-screen flex flex-col items-center justify-start bg-primary text-white">
+    <main className="flex h-screen flex-col items-center justify-start bg-primary text-white">
       <section>
-        <CreatePost />
+        <Suspense fallback={<div>Loading...</div>}>
+          <WritePost />
+        </Suspense>
       </section>
       <section>
         <p>Please sign in to create a post.</p>
       </section>
-  </main>
-  )
+    </main>
+  );
 }
-
