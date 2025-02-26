@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { useCustomSession } from "./SessionProvider";
 import { ProfileDropdown } from "./ProfileDropdown";
 import { SquarePlus } from 'lucide-react';
+import DarkModeButton from "./DarkModeButton";
 
 
 export function Nav() {
@@ -41,6 +42,7 @@ export function Nav() {
 
   return (
     <nav className="flex h-20 w-full items-center justify-between bg-primary px-10">
+      <DarkModeButton />
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold text-white">
         <Link href="/">Journo</Link>
         <button

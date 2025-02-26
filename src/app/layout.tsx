@@ -1,3 +1,4 @@
+import DarkModeButton from "~/components/DarkModeButton";
 import { Nav } from "~/components/Nav";
 import { SessionProvider } from "~/components/SessionProvider";
 import { ThemeProvider } from "~/components/theme-provider";
