@@ -28,7 +28,7 @@ const config: Config = {
       },
       colors: {
         // Dark Mode Colors
-        dark: "#0c042c", // Background for dark mode
+        dark: "#020114", // Background for dark mode
 
         // Light Mode Colors
         light: "#f8f8f8", // Background for light mode

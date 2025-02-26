@@ -41,9 +41,9 @@ export function Nav() {
   }, [open]);
 
   return (
-    <nav className="flex h-20 w-full items-center justify-between bg-primary px-10">
+    <nav className="flex h-20 w-full text-primary-dark items-center justify-between dark:bg-dark px-10">
       <DarkModeButton />
-      <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold text-white">
+      <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold">
         <Link href="/">Journo</Link>
         <button
           ref={buttonRef}
@@ -89,7 +89,7 @@ export function Nav() {
         )}
 
         {/* Desktop Menu */}
-        <div className="hidden items-center justify-end gap-3 text-lg font-normal text-white md:flex">
+        <div className="hidden items-center justify-end gap-3 text-lg font-normal  md:flex">
           {isLoggedIn ? (
             <>
               <Link href="/write"><SquarePlus /></Link>

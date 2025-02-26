@@ -1,4 +1,3 @@
-import DarkModeButton from "~/components/DarkModeButton";
 import { Nav } from "~/components/Nav";
 import { SessionProvider } from "~/components/SessionProvider";
 import { ThemeProvider } from "~/components/theme-provider";
@@ -19,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <ThemeProvider>
         <SessionProvider>
-          <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
+          <body className="max-w-600 mx-auto text-primary-dark h-[100vh] dark:bg-dark font-noto ">
             <Nav />
             {children}
           </body>

@@ -5,14 +5,14 @@ import { Moon, Sun } from "lucide-react";
 function DarkModeButton() {
   const { theme, toggleTheme } = useTheme();
 
-  const strokeColor = theme === "dark" ? "#ffffff" : "#000000"; // White for dark mode, black for light mode
+const strokeColor = theme === "dark" ? "#ffffff" : "#020114"; // White for dark mode, black for light mode
 
   return (
     <button
       onClick={toggleTheme}
       className="hover:bg-main-orange fixed bottom-10 right-10 flex items-center justify-center rounded-full border p-4"
     >
-      {theme === "dark" ? <Sun /> : <Moon stroke={strokeColor} />}
+      {theme === "dark" ? <Sun stroke={strokeColor} /> : <Moon stroke={strokeColor} />}
     </button>
   );
 }
