@@ -1,5 +1,6 @@
 import { Nav } from "~/components/Nav";
 import { SessionProvider } from "~/components/SessionProvider";
+import { ThemeProvider } from "~/components/theme-provider";
 import "~/styles/globals.css";
 
 export const metadata = {
@@ -8,15 +9,21 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({ children, }: { children: React.ReactNode; }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <SessionProvider>
-        <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
-          <Nav />
-          {children}
-        </body>
-      </SessionProvider>
+      <ThemeProvider>
+        <SessionProvider>
+          <body className="max-w-600 mx-auto h-[100vh] bg-primary font-noto ">
+            <Nav />
+            {children}
+          </body>
+        </SessionProvider>
+      </ThemeProvider>
     </html>
   );
 }
