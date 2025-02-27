@@ -3,15 +3,20 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { signOut } from "lib/auth-client";
+import { useRouter } from "next/navigation";
 
 interface ProfileDropdownProps {
-  image: string | null; 
+  image: string | null;
   name: string | null;
 }
 
-export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ image, name }) => {
+export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
+  image,
+  name,
+}) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   // Close the dropdown when clicking outside
   useEffect(() => {
@@ -56,7 +61,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ image, name })
           className="absolute right-0 mt-2 w-52 rounded-md bg-white shadow-lg"
         >
           <ul className="py-1">
-            <li className="px-4 py-2 border-b"><h1>{name ?? 'user'}</h1></li>
+            <li className="border-b px-4 py-2">
+              <h1>{name ?? "user"}</h1>
+            </li>
             <li className="px-4 py-2 hover:bg-gray-100">
               <Link href="/profile" onClick={() => setIsOpen(false)}>
                 Profile
@@ -71,9 +78,11 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ image, name })
               <button
                 onClick={async () => {
                   try {
-                    await signOut(); 
+                    console.log("Signing out...");
+                    await signOut();
+                    console.log("Signed out successfully");
                     setIsOpen(false);
-                    window.location.href = "/";
+                    router.push("/");
                   } catch (error) {
                     console.error("Failed to sign out:", error);
                   }
