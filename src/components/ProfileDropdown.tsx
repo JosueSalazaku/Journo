@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { signOut } from "lib/auth-client";
+import { authClient } from "lib/auth-client";
 import { useRouter } from "next/navigation";
 
 interface ProfileDropdownProps {
@@ -79,7 +79,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                 onClick={async () => {
                   try {
                     console.log("Signing out...");
-                    await signOut();
+                    await authClient.signOut()
                     console.log("Signed out successfully");
                     setIsOpen(false);
                     router.push("/");
