@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { type Post } from "~/types";
 import { getAllPosts } from "~/service/posts-service";
 import FadeLoader from "react-spinners/FadeLoader";
+import WriteComment from "~/components/WriteComment";
 interface DynamicPostProps {
     params: {
         id: string;
@@ -42,10 +43,11 @@ export default function Page({ params }: DynamicPostProps) {
     }
 
     return (
-        <div className="container mx-auto p-8 ">
+        <div className="container mx-auto flex flex-col  p-8 gap-5">
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
             <div>{post.content}</div>
-            <p>{post.createdAt.toString()}</p>
+            <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
+            <WriteComment />
         </div>
     );
 }
