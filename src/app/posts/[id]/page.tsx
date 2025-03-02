@@ -42,7 +42,7 @@ export default function Page({ params }: DynamicPostProps) {
     }
 
     return (
-        <div className="container mx-auto p-8 text-white">
+        <div className="container mx-auto p-8 ">
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
             <div>{post.content}</div>
             <p>{post.createdAt.toString()}</p>

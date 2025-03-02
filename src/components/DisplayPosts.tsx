@@ -58,7 +58,7 @@ export default function DisplayPosts() {
               <h2 className="mb-2 text-xl  font-bold">{post.title}</h2>
             </Link>
             <Link href={`/posts/${post.id}`}>
-              <p className="mb-4 ">{post.content}</p>
+              <p className="mb-4 line-clamp-4">{post.content}</p>
             </Link>
             <div className="text-sm ">
               <p>By: {user?.name}</p>
