@@ -10,7 +10,7 @@ export default function HomePage() {
   const isLoggedIn = !!session?.data?.user;
 
   return (
-    <main className="h-screen flex flex-col items-center justify-start text-white p-4 sm:p-8">
+    <main className="h-screen flex flex-col items-center justify-start p-4 sm:p-8">
       <section className="mt-10 gap-7 text-center sm:text-left">
         {isLoggedIn ? (
           <>

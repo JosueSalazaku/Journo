@@ -41,7 +41,7 @@ export function Nav() {
   }, [open]);
 
   return (
-    <nav className="flex h-20 w-full text-primary-dark items-center justify-between dark:bg-dark px-10">
+    <nav className="flex h-20 w-full text-primary-dark dark:text-primary-light items-center justify-between dark:bg-dark px-10">
       <DarkModeButton />
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold">
         <Link href="/">Journo</Link>
