@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <ThemeProvider>
         <SessionProvider>
-          <body className="max-w-600 mx-auto text-primary-dark h-[100vh] dark:bg-dark font-noto ">
+          <body className="max-w-600 mx-auto dark:text-primary h-[100vh] dark:bg-dark font-noto ">
             <Nav />
             {children}
           </body>

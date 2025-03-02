@@ -10,7 +10,7 @@ const strokeColor = theme === "dark" ? "#ffffff" : "#ffffff"; // White for dark 
   return (
     <button
       onClick={toggleTheme}
-      className="hover:bg-main-orange fixed bottom-10 dark:bg-primary-light bg-primary-dark bg-border-light right-10 flex items-center justify-center rounded-full p-4"
+      className="hover:bg-main-orange fixed bottom-10 dark:bg-primary bg-primary right-10 flex items-center justify-center rounded-full p-4"
     >
       {theme === "dark" ? <Sun stroke={strokeColor} /> : <Moon stroke={strokeColor} />}
     </button>

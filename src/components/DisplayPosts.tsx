@@ -42,7 +42,7 @@ export default function DisplayPosts() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl text-primary-dark dark:bg-dark px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl dark:bg-dark px-4 sm:px-6 lg:px-8">
       {posts
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .map((post) => (
