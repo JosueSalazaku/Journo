@@ -19,6 +19,15 @@ export const posts = pgTable("posts", {
 	updatedAt: timestamp("updatedAt").notNull(),
 });
 
+export const comments = pgTable("comments", {
+  id: text("id").primaryKey(),
+  content: text("content").notNull(),
+  userId: text("userId").notNull().references(() => user.id),
+  postId: text("postId").notNull().references(() => posts.id),
+  createdAt: timestamp("createdAt").notNull(),
+  updatedAt: timestamp("updatedAt").notNull(),
+});
+
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expiresAt").notNull(),
