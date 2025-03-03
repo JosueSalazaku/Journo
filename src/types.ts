@@ -17,6 +17,15 @@ export interface Post {
 	updatedAt: Date;
 }
 
+export interface Comment {
+	id: string;
+	content: string;
+	userId: string;
+	postId: string;
+	createdAt: Date;
+	updatedAt: Date;
+}
+
 export interface Session {
 	id: string;
 	expiresAt: Date;

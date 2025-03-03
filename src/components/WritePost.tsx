@@ -38,7 +38,7 @@ export default function WritePost() {
     }
 
     if (!title || !content || !userId) {
-      setError("Missing required fields");
+      setError("Missing required fields, Pleas add Title and Content!");
       return;
     }
 
@@ -61,22 +61,22 @@ export default function WritePost() {
   }
 
   return (
-    <div className="mt-8 flex w-screen justify-center px-12">
+    <div className="mt-8 flex w-screen dark:text-white justify-center px-12">
       <form
         onSubmit={handlePost}
-        className="flex h-fit w-screen flex-col space-y-6 bg-white p-4 text-black shadow-lg"
+        className="flex h-fit w-screen flex-col space-y-6  p-4 text-black shadow-lg"
       >
         <Textarea
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className="w-full border-b border-none border-black py-4 text-4xl font-bold placeholder-orange-400 focus:outline-none"
+          className="w-full border-b dark:text-white border-none dark:bg-border border-black py-4 text-4xl font-bold placeholder-orange-400 focus:outline-none"
           placeholder="Title"
         />
 
         <Textarea
           onChange={(e) => setContent(e.target.value)}
           value={content}
-          className="h-[500px] w-full border-none text-xl leading-relaxed placeholder-gray-500 focus:outline-none"
+          className="h-[500px] w-full border-none dark:text-white dark:bg-border text-xl leading-relaxed placeholder-gray-500 focus:outline-none"
           placeholder="Write your story..."
         />
 
