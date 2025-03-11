@@ -78,11 +78,9 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
               <button
                 onClick={async () => {
                   try {
-                    console.log("Signing out...");
                     await authClient.signOut()
-                    console.log("Signed out successfully");
                     setIsOpen(false);
-                    router.push("/");
+                    // router.push("/");
                   } catch (error) {
                     console.error("Failed to sign out:", error);
                   }

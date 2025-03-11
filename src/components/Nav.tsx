@@ -6,9 +6,10 @@ import { MdOutlineClose } from "react-icons/md";
 import { Button } from "./ui/button";
 import { useCustomSession } from "./SessionProvider";
 import { ProfileDropdown } from "./ProfileDropdown";
-import { SquarePlus } from 'lucide-react';
+import { SquarePlus } from "lucide-react";
 import DarkModeButton from "./DarkModeButton";
-
+import { useRouter } from "next/navigation";
+import { authClient } from "lib/auth-client";
 
 export function Nav() {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,7 @@ export function Nav() {
   const session = useCustomSession();
   const { name, image } = session?.data?.user ?? {};
   const isLoggedIn = !!session?.data?.user;
+  const router = useRouter();
 
   useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
@@ -40,8 +42,17 @@ export function Nav() {
     };
   }, [open]);
 
+  const handleSignOut = async () => {
+    try {
+      await authClient.signOut();
+      router.push("/");
+    } catch (error) {
+      console.error("Failed to sign out:", error);
+    }
+  };
+
   return (
-    <nav className="flex h-20 w-full text-primary-dark dark:text-primary-light items-center justify-between dark:bg-dark px-10">
+    <nav className="flex h-20 w-full items-center justify-between px-10 text-primary-dark dark:bg-dark dark:text-primary-light">
       <DarkModeButton />
       <div className="flex w-full items-center justify-between gap-3 text-2xl font-bold">
         <Link href="/">Journo</Link>
@@ -64,7 +75,7 @@ export function Nav() {
                 <>
                   <li className="py-2">
                     <Link href="/write" onClick={() => setOpen(false)}>
-                    <SquarePlus />
+                      <SquarePlus />
                     </Link>
                   </li>
                   <li className="py-2">
@@ -76,6 +87,9 @@ export function Nav() {
                     <Link href="/insights" onClick={() => setOpen(false)}>
                       Insights
                     </Link>
+                  </li>
+                  <li className="py-2">
+                    <button onClick={handleSignOut}>Sign Out</button>
                   </li>
                 </>
               ) : null}
@@ -92,7 +106,9 @@ export function Nav() {
         <div className="hidden items-center justify-end gap-3 text-lg font-normal  md:flex">
           {isLoggedIn ? (
             <>
-              <Link href="/write"><SquarePlus /></Link>
+              <Link href="/write">
+                <SquarePlus />
+              </Link>
               <Link href="/explore">Explore</Link>
               <Link href="/insights">Insights</Link>
             </>
@@ -106,7 +122,7 @@ export function Nav() {
 
       {/* ProfileDropdown Component */}
       {isLoggedIn && (
-        <div className="hidden md:block pl-4">
+        <div className="hidden pl-4 md:block">
           <ProfileDropdown image={image ?? null} name={name ?? null} />
         </div>
       )}
